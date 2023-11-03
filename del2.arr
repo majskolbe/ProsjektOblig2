@@ -17,17 +17,27 @@ fun energi-to-number(s) -> Number:
   block:
     cases(Option) string-to-number(s): 
     | some(a) => a 
-    | none => 0 
+      | none => 120 
     end
   end 
 where: 
-  energi-to-number("") is 0 
+  energi-to-number("") is 120 
   energi-to-number("48") is 48 
 end 
 
 #gjør teksten om til tall i energi-kolonnen
 
 energi-tabell = transform-column(kWh-wealthy-consumer-data, "energi", energi-to-number) 
+
+distance-travelled-per-day = 48
+distance-per-unit-of-fuel = 4
+energy-per-unit-of-fuel = 10
+
+#regner ut energiforbruk per dag for en vanlig inbygger
+energy-per-day = ( distance-travelled-per-day / 
+                            distance-per-unit-of-fuel ) * 
+                                        energy-per-unit-of-fuel
+energy-per-day
 
 #skriver ut tabellen
 
